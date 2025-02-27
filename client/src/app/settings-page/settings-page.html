@@ -21,15 +21,16 @@
       </mat-card-header>
       <mat-card-content>
         <mat-form-field class="input-field">
-          <mat-label>Role</mat-label>
-          <mat-select [(ngModel)]="judgeOption" data-test="judgeOptionSelect">
+          <mat-label>Judge Selection Options</mat-label>
+          <mat-select value="cycle" data-test="judgeOptionSelect" >
             <mat-option>--</mat-option>
-            <mat-option value="cycle">Judges are chosen in a circular pattern</mat-option>
-            <mat-option value="winner">The previous round's winner is this round's judge</mat-option>
+            <mat-option value="cycle">Around the table</mat-option>
+            <mat-option value="winner">Winner becomes judge</mat-option>
           </mat-select>
-          <mat-hint>Filtered on server</mat-hint>
         </mat-form-field>
-
+        <mat-checkbox>
+          Discard Last Submission
+        </mat-checkbox>
       </mat-card-content>
     </mat-card>
   </div>
