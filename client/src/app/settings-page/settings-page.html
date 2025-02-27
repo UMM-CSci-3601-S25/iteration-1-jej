@@ -1,0 +1,36 @@
+<div class="flex-row">
+  <div class="flex-1">
+    <mat-card class="home-card">
+      display code here
+    </mat-card>
+    <mat-card class="home-card">
+      <mat-card-content>
+        <a routerLink="/users">
+          <button>
+            Start Game
+          </button>
+        </a>
+
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="home-card">
+      <mat-card-header>
+        <mat-card-title>
+          Options
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field class="input-field">
+          <mat-label>Role</mat-label>
+          <mat-select [(ngModel)]="judgeOption" data-test="judgeOptionSelect">
+            <mat-option>--</mat-option>
+            <mat-option value="cycle">Judges are chosen in a circular pattern</mat-option>
+            <mat-option value="winner">The previous round's winner is this round's judge</mat-option>
+          </mat-select>
+          <mat-hint>Filtered on server</mat-hint>
+        </mat-form-field>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
