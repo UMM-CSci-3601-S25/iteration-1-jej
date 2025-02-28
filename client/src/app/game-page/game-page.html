@@ -1,37 +1,15 @@
 <div class="flex-row">
   <div class="flex-1">
     <mat-card class="home-card">
-      display code here
+      this is actually the game page
     </mat-card>
-    <mat-card class="home-card">
-      <mat-card-content>
-        <a routerLink="/users">
-          <button>
-            Start Game
-          </button>
-        </a>
+    <ul class="player-list">
+    </ul>
+   <p id="prompt"> enter prompt here </p>
+   <mat-form-field>
+    <input type="text">
+    <input type="submit" value="Submit">
+  </mat-form-field>
 
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="home-card">
-      <mat-card-header>
-        <mat-card-title>
-          Options
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-form-field class="input-field">
-          <mat-label>Judge Selection Options</mat-label>
-          <mat-select value="cycle" data-test="judgeOptionSelect" >
-            <mat-option>--</mat-option>
-            <mat-option value="cycle">Around the table</mat-option>
-            <mat-option value="winner">Winner becomes judge</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-checkbox>
-          Discard Last Submission
-        </mat-checkbox>
-      </mat-card-content>
-    </mat-card>
   </div>
 </div>
