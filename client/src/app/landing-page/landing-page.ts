@@ -13,5 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [MatCardModule, RouterLink, MatInputModule, MatFormFieldModule, MatSelectModule]
 })
 export class HomeComponent {
-
+  createGame() {
+    return;
+  }
 }
