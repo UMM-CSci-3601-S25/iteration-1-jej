@@ -55,12 +55,7 @@ public class Main {
    */
   static Controller[] getControllers(MongoDatabase database) {
     Controller[] controllers = new Controller[] {
-      // You would add additional controllers here, as you create them,
-      // although you need to make sure that each of your new controllers implements
-      // the `Controller` interface.
-      //
-      // You can also remove this UserController once you don't need it.
-      new UserController(database)
+      new GameController(database)
     };
     return controllers;
   }
