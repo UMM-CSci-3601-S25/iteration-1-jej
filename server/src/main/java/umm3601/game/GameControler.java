@@ -25,11 +25,13 @@ import io.javalin.http.HttpStatus;
 import io.javalin.http.NotFoundResponse;
 import umm3601.Controller;
 
-public class TodoController implements Controller {
+public class GameController implements Controller {
 
-  private static final String API_TODO_BY_ID = "/api/todos/{id}";
+  private static final String API_GAME_BY_ID = "/api/games/{id}";
+  private static final String API_GAMES = "/api/games/new";
+  private static final String API_NUMBER_OF_GAMES = "/api/games/number";
 
-  public TodoController(MongoDatabase database) {
+  public GameController(MongoDatabase database) {
     gameCollection = JacksonMongoCollection.builder().build(
         database,
         "games",
@@ -57,6 +59,7 @@ public class TodoController implements Controller {
   public void addRoutes(Javalin server) {
     server.get(API_GAME_BY_ID, this::getGame);
     server.post(API_GAMES, this::addNewGame);
+    sever.get(API_NUMBER_OF_GAMES, this::numGames);
   }
 
   public void addNewGame(Context ctx) {
@@ -68,4 +71,8 @@ public class TodoController implements Controller {
     ctx.json(Map.of("id", newGame._id));
     ctx.status(HttpStatus.CREATED);
   }
+
+  public void numGames(Context ctx) {
+    return;
+  } 
 }

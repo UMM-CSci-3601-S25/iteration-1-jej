@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
@@ -14,12 +14,11 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [MatCardModule, RouterLink, MatInputModule, MatFormFieldModule, MatSelectModule]
 })
 export class HomeComponent {
-  readonly nextGame;
   constructor(private httpClient: HttpClient) {
   }
 
   createGame() {
-    let gameCode = this.httpClient.get(this.nextGame);
-    this.httpClient.post<{id: number}>('/game/', {id: this.nextGame});
+    let gameCode = 1;//this.httpClient.get<number>('/api/games/number');
+    this.httpClient.post<{id: number}>('/game/', {id: gameCode});
   }
 }
