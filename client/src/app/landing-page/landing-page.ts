@@ -5,6 +5,8 @@ import { RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { Game } from '../game';
+
 
 
 @Component({
@@ -20,7 +22,8 @@ export class HomeComponent {
 
   createGame() {
     console.info("createGame() called");
-    const gameCode = "1";//this.httpClient.get<number>('/api/games/number');
-    this.httpClient.post<{id: string}>('/api/game/new', {id: gameCode});
+    // const gameCode = "1";//this.httpClient.get<number>('/api/games/number');
+    const newGame: Partial<Game> = { };
+    this.httpClient.post<{id: string}>('/api/game/new', newGame);
   }
 }
