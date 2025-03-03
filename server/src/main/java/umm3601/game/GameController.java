@@ -1,22 +1,14 @@
 package umm3601.game;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.regex.Pattern;
 
-import org.bson.Document;
 import org.bson.UuidRepresentation;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mongojack.JacksonMongoCollection;
 
 import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
-import com.mongodb.client.model.Sorts;
+
 
 import io.javalin.Javalin;
 import io.javalin.http.BadRequestResponse;
@@ -25,13 +17,14 @@ import io.javalin.http.HttpStatus;
 import io.javalin.http.NotFoundResponse;
 import umm3601.Controller;
 
-private final JacksonMongoCollection<Game> gameCollection;
+
 
 public class GameController implements Controller {
 
-  private static final String API_GAME_BY_ID = "/api/games/{id}";
-  private static final String API_GAMES = "/api/games/new";
-  private static final String API_NUMBER_OF_GAMES = "/api/games/number";
+  private static final String API_GAME_BY_ID = "/api/game/{id}";
+  private static final String API_GAMES = "/api/game/new";
+  private static final String API_NUMBER_OF_GAMES = "/api/game/number";
+  private final JacksonMongoCollection<Game> gameCollection;
 
   public GameController(MongoDatabase database) {
     gameCollection = JacksonMongoCollection.builder().build(
@@ -66,7 +59,7 @@ public class GameController implements Controller {
 
   public void addNewGame(Context ctx) {
     Game newGame = ctx.bodyValidator(Game.class).get();
-
+    System.out.println("check");
     // Add the new game to the database
     gameCollection.insertOne(newGame);
 
@@ -76,5 +69,5 @@ public class GameController implements Controller {
 
   public void numGames(Context ctx) {
     return;
-  } 
+  }
 }
