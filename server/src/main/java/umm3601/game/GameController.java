@@ -25,6 +25,8 @@ import io.javalin.http.HttpStatus;
 import io.javalin.http.NotFoundResponse;
 import umm3601.Controller;
 
+private final JacksonMongoCollection<Game> gameCollection;
+
 public class GameController implements Controller {
 
   private static final String API_GAME_BY_ID = "/api/games/{id}";
@@ -59,7 +61,7 @@ public class GameController implements Controller {
   public void addRoutes(Javalin server) {
     server.get(API_GAME_BY_ID, this::getGame);
     server.post(API_GAMES, this::addNewGame);
-    sever.get(API_NUMBER_OF_GAMES, this::numGames);
+    server.get(API_NUMBER_OF_GAMES, this::numGames);
   }
 
   public void addNewGame(Context ctx) {
