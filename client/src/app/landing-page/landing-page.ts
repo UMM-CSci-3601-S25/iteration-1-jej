@@ -18,7 +18,7 @@ export class HomeComponent {
   }
 
   createGame() {
-    let gameCode = 1;//this.httpClient.get<number>('/api/games/number');
+    const gameCode = 1;//this.httpClient.get<number>('/api/games/number');
     this.httpClient.post<{id: number}>('/game/', {id: gameCode});
   }
 }
