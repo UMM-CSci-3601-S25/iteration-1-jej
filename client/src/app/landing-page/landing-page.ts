@@ -23,7 +23,8 @@ export class HomeComponent {
   createGame() {
     console.info("createGame() called");
     // const gameCode = "1";//this.httpClient.get<number>('/api/games/number');
-    const newGame: Partial<Game> = { };
+    const newGame: Partial<Game> = {  "players": ["kk"],   "judge": 0, "discardLast": false, "winnerBecomesJudge": false };
+    console.info(newGame);
     this.httpClient.post<{id: string}>('/api/game/new', newGame);
   }
 }
