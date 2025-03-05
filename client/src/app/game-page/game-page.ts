@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,6 +11,7 @@ import { Game } from '../game';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-game-page',
@@ -20,11 +21,11 @@ import { of } from 'rxjs';
   imports: [MatCardModule, RouterLink, MatInputModule, MatFormFieldModule, MatSelectModule, FormsModule, MatCheckboxModule]
 })
 export class GameComponent {
-  todo = toSignal(
+  game = toSignal(
     this.route.paramMap.pipe(
       // Map the paramMap into the id
       map((paramMap: ParamMap) => paramMap.get('id')),
-      switchMap((id: string) => this.httpClient.get<Game>(`/api/game/${id}`),
+      switchMap((id: string) => this.httpClient.get<Game>(`/api/game/${id}`)),
       catchError((_err) => {
         this.error.set({
           help: 'There was a problem loading the game – try again.',
@@ -34,5 +35,10 @@ export class GameComponent {
         return of();
       })
 
-    )
+    ));
+  error = signal({help: '', httpResponse: '', message: ''});
+  constructor(
+    private route: ActivatedRoute,
+    private httpClient: HttpClient
+  ) {}
 }
