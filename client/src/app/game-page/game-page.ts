@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { toObservable } from '@angular/core/rxjs-interop';
+//import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Game } from '../game';
 
 @Component({
   selector: 'app-game-page',
@@ -16,7 +17,5 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   imports: [MatCardModule, RouterLink, MatInputModule, MatFormFieldModule, MatSelectModule, FormsModule, MatCheckboxModule]
 })
 export class GameComponent {
-  judgeOption = signal<string | undefined>(undefined);
-  private judgeOption$ = toObservable(this.judgeOption);
-  default = 'cycle';
+  game = input.required<Game>();
 }
