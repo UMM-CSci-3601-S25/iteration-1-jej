@@ -1,11 +1,11 @@
 <div class="flex-row">
   <div class="flex-1">
     <mat-card class="home-card">
-      display code here
+      <h1>Sharable code: {{ game()._id }}</h1>
     </mat-card>
     <mat-card class="home-card">
       <mat-card-content>
-        <a routerLink="/game">
+        <a routerLink="/game/{{game()._id}}">
           <button>
             Start Game
           </button>
@@ -22,7 +22,7 @@
       <mat-card-content>
         <mat-form-field class="input-field">
           <mat-label>Judge Selection Options</mat-label>
-          <mat-select value="cycle" data-test="judgeOptionSelect" >
+          <mat-select value="cycle" data-test="judgeOptionSelect">
             <mat-option>--</mat-option>
             <mat-option value="cycle">Around the table</mat-option>
             <mat-option value="winner">Winner becomes judge</mat-option>
