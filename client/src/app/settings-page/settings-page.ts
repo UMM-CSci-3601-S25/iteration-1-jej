@@ -25,9 +25,18 @@ export class SettingsComponent {
   game = toSignal(
     this.route.paramMap.pipe(
       map((paramMap: ParamMap) => paramMap.get('id')),
-      switchMap((id: string) => this.httpClient.get<Game>('/api/game/${id}'))
+      switchMap((id: string) => this.httpClient.get<Game>(`/api/game/${id}`)),
+      catchError((_err) => {
+        this.error.set({
+          help: 'There was problem loading the game - try again.',
+          httpResponse: _err.message,
+          message: _err.error?.title,
+        });
+        return of();
+      })
     )
   );
+  error = signal({help: '', httpResponse: '', message: ''});
 
   constructor (
     private route: ActivatedRoute,
