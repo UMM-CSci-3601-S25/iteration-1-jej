@@ -37,8 +37,12 @@ export class GameComponent {
 
     ));
   error = signal({help: '', httpResponse: '', message: ''});
+  submit() {
+    this.httpClient.put<Game>('/api/game/submit', {prompt: this.submission});
+  }
 
-  username = "ted";
+  submission = "";
+  username = "Steady Roosevelt";
 
   constructor(
     private route: ActivatedRoute,
