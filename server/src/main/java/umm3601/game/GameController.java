@@ -59,7 +59,6 @@ public class GameController implements Controller {
 
   public void addNewGame(Context ctx) {
     Game newGame = ctx.bodyValidator(Game.class).get();
-    System.out.println("check");
     // Add the new game to the database
     gameCollection.insertOne(newGame);
 

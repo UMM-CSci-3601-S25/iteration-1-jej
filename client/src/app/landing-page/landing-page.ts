@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { Game } from '../game';
+import { map } from 'rxjs';
 
 
 
@@ -14,10 +16,10 @@ import { Game } from '../game';
   templateUrl: 'landing-page.html',
   styleUrls: ['./landing-page.scss'],
   providers: [],
-  imports: [MatCardModule, RouterLink, MatInputModule, MatFormFieldModule, MatSelectModule]
+  imports: [MatCardModule, RouterLink, MatInputModule, MatFormFieldModule, MatSelectModule, FormsModule]
 })
 export class HomeComponent {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   createGame() {
@@ -25,6 +27,10 @@ export class HomeComponent {
     // const gameCode = "1";//this.httpClient.get<number>('/api/games/number');
     const newGame: Partial<Game> = {  "players": ["kk"],   "judge": 0, "discardLast": false, "winnerBecomesJudge": false };
     console.info(newGame);
-    this.httpClient.post<{id: string}>('/api/game/new', newGame);
+    this.httpClient.post<{id: string}>('/api/game/new', newGame).pipe(map(response => response.id)).subscribe({
+      next: (newId) => {
+        this.router.navigateByUrl('/settings/' + newId);
+      }
+    });
   }
 }

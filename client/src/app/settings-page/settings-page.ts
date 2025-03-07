@@ -1,12 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { Game } from '../game';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-settings-page',
@@ -19,4 +22,15 @@ export class SettingsComponent {
   judgeOption = signal<string | undefined>(undefined);
   private judgeOption$ = toObservable(this.judgeOption);
   default = 'cycle';
+  game = toSignal(
+    this.route.paramMap.pipe(
+      map((paramMap: ParamMap) => paramMap.get('id')),
+      switchMap((id: string) => this.httpClient.get<Game>('/api/game/${id}'))
+    )
+  );
+
+  constructor (
+    private route: ActivatedRoute,
+    private httpClient: HttpClient
+  ) {}
 }

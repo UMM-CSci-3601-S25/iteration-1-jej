@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { RouterLink, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,7 +18,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'game-page.html',
   styleUrls: ['./game-page.scss'],
   providers: [],
-  imports: [MatCardModule, RouterLink, MatInputModule, MatFormFieldModule, MatSelectModule, FormsModule, MatCheckboxModule]
+  imports: [MatCardModule, MatInputModule, MatFormFieldModule, MatSelectModule, FormsModule, MatCheckboxModule]
 })
 export class GameComponent {
   game = toSignal(
@@ -37,6 +37,9 @@ export class GameComponent {
 
     ));
   error = signal({help: '', httpResponse: '', message: ''});
+
+  username = "ted";
+
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient
