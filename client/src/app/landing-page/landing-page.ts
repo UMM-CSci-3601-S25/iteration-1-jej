@@ -22,6 +22,8 @@ export class HomeComponent {
   constructor(private httpClient: HttpClient, private router: Router) {
   }
 
+  joinId = "";
+
   createGame() {
     console.info("createGame() called");
     // const gameCode = "1";//this.httpClient.get<number>('/api/games/number');
